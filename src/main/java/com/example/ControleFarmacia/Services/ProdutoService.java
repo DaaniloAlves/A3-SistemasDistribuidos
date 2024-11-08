@@ -1,4 +1,4 @@
-package com.example.ControleFarmacia.Services;
+package com.example.ControleFarmacia.services;
 
 import org.springframework.stereotype.Service;
 

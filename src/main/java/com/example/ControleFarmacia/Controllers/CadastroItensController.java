@@ -6,15 +6,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping()
-public class HomeController {
-    
-    @GetMapping("/home")
-    private ModelAndView home() {
+@RequestMapping("/Cadastro")
+public class CadastroItensController {
+    @GetMapping()
+    public ModelAndView index() {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("home");
+        mv.setViewName("cadastroIndex");
         return mv;
     }
-    
-
 }
