@@ -1,3 +1,74 @@
-<h1>
-    Home
-</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <section class="section-products">
+        <div th:each="produto : ${produtos}">
+            <div class="product-card">
+                <div class="img">
+                    <img th:src="@{'/templates/imagens' + ${produto.nome}.toLowerCase() + '.jpg'}" alt="Sem Imagem">
+                </div>
+                <div class="name">
+                    <p th:text="${produto.nome}"></p>
+                </div>
+                <div class="price">
+                    <b><p th:text="'R$ ' + ${produto.preco}"></p></b>
+                </div>
+                <div class="actions">
+                    <div class="add">
+                        <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                          </svg>   </a>                       
+                    </div>
+                    <div class="remove">
+                        <a href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                          </svg>   </a>                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     
+</body>
+<style>
+    svg {
+        height: 30px;
+        width: 30px;
+    }
+    img {
+        margin: 10px;
+        border: 1px solid black;
+        border-radius: 5%;
+        max-width: 150px;
+        max-height: 50px;
+    }
+    .section-products {
+        display: flex;
+        gap: 20px;
+    }
+    .product-card {
+        display: flex;
+        flex-direction: column;
+        border: 0.3px solid black;
+        border-radius: 5%;
+    }
+    .product-card div {
+        align-self: center;
+    }
+    .product-card div p {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .actions {
+        display: flex;
+        gap: 20px;
+    }
+</style>
+</html>

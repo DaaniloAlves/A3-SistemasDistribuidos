@@ -1,4 +1,4 @@
-package com.example.ControleFarmacia.models;
+package com.example.ControleFarmacia.Models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +20,5 @@ public class Produto {
     private int qtd;
     private String descricao;
     private float preco;
-    private String imagem;
 }
     

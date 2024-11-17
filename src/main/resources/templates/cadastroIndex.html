@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/cadastro.css">
+    <link rel="stylesheet" href="css/cadastro.css"/>
     <title>Cadastro</title>
 </head>
 <body>
@@ -35,21 +35,17 @@
     <section class="mainSection">
         <div class="main">
             <h1>Cadastro</h1>
-            <form action="#">
+            <form action="/Cadastro/Cadastrado" method="post" enctype="multipart/form-data">
                 <label for="name">Nome</label>
-                <input type="text" id="name">
-                <label for="code">Código</label>
-                <input type="text" id="code">
-                <label for="format">Formato</label>
-                <input type="text" id="format">
-                <label for="type">Tipo</label>
-                <input type="text" id="type">
-                <label for="situation">Situação</label>
-                <input type="checkbox" id="situation">
+                <input type="text" id="name" name="name">
+                <label for="img">Imagem</label>
+                <input type="file" id="img" name="img">
+                <label for="desc">Descrição</label>
+                <input type="text" id="desc" name="desc">
                 <label for="price">Preço</label>
-                <input type="text" id="price">
+                <input type="text" id="price" name="price">
                 <label for="qtd">Quantidade</label>
-                <input type="text" id="qtd">    
+                <input type="text" id="qtd" name="qtd">    
                 <button id="cancel">Cancelar</button>
                 <button id="save">Salvar</button>
             </form>
@@ -58,4 +54,26 @@
 
     </section>
 </body>
+<style>
+    .menuLateral {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 70px;
+    width: 10%;
+}
+.itemLateral {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+}
+button {
+    padding: 10px 40px;
+}
+svg {
+    height: 50px;
+    width: 50px;
+}
+</style>
 </html>
