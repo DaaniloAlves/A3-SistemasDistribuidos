@@ -1,9 +1,9 @@
-package com.example.ControleFarmacia.Repositories;
+package com.example.ControleFarmacia.repositories;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.ControleFarmacia.Models.Produto;
+import com.example.ControleFarmacia.models.Carrinho;
 
-public interface CarrinhoRepo extends CrudRepository<Produto, Integer> {
+public interface CarrinhoRepo extends JpaRepository<Carrinho, Integer> {
     
 }

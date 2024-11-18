@@ -1,4 +1,4 @@
-package com.example.ControleFarmacia.Controllers;
+package com.example.ControleFarmacia.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.ControleFarmacia.Models.Produto;
-import com.example.ControleFarmacia.Services.ProdutoService;
+import com.example.ControleFarmacia.models.Produto;
+import com.example.ControleFarmacia.services.ProdutoService;
 
 @RestController
 @RequestMapping()
@@ -19,7 +19,7 @@ public class HomeController {
     @Autowired
     ProdutoService service;
 
-    @GetMapping("/home")
+    @GetMapping("/Home")
     private ModelAndView home() {
         ModelAndView mv = new ModelAndView("home");
         Iterable<Produto> produtosIterable = service.findAll();

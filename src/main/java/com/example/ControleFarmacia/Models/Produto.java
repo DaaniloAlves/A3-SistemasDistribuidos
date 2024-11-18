@@ -1,4 +1,4 @@
-package com.example.ControleFarmacia.Models;
+package com.example.ControleFarmacia.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

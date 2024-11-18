@@ -1,12 +1,12 @@
-package com.example.ControleFarmacia.Services;
+package com.example.ControleFarmacia.services;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.ControleFarmacia.Models.Produto;
-import com.example.ControleFarmacia.Repositories.ProdutoRepo;
+import com.example.ControleFarmacia.models.Produto;
+import com.example.ControleFarmacia.repositories.ProdutoRepo;
 
 @Service
 public class ProdutoService {
