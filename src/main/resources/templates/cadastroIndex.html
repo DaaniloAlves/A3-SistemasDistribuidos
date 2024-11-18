@@ -3,36 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/cadastro.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     <title>Cadastro</title>
 </head>
 <body>
-    <nav class="menuLateral">
-        <div class="itemLateral">
-            <img src="" alt="">
-        </div>
-        <div class="itemLateral">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="shop">
-                <path d="M22,7.82a1.25,1.25,0,0,0,0-.19v0h0l-2-5A1,1,0,0,0,19,2H5a1,1,0,0,0-.93.63l-2,5h0v0a1.25,1.25,0,0,0,0,.19A.58.58,0,0,0,2,8H2V8a4,4,0,0,0,2,3.4V21a1,1,0,0,0,1,1H19a1,1,0,0,0,1-1V11.44A4,4,0,0,0,22,8V8h0A.58.58,0,0,0,22,7.82ZM13,20H11V16h2Zm5,0H15V15a1,1,0,0,0-1-1H10a1,1,0,0,0-1,1v5H6V12a4,4,0,0,0,3-1.38,4,4,0,0,0,6,0A4,4,0,0,0,18,12Zm0-10a2,2,0,0,1-2-2,1,1,0,0,0-2,0,2,2,0,0,1-4,0A1,1,0,0,0,8,8a2,2,0,0,1-4,.15L5.68,4H18.32L20,8.15A2,2,0,0,1,18,10Z"></path>
-              </svg>
-            Comprar
-        </div>
-        <div class="itemLateral">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="account">
-                <path d="M16,2A14,14,0,1,0,30,16,14,14,0,0,0,16,2ZM10,26.39a6,6,0,0,1,11.94,0,11.87,11.87,0,0,1-11.94,0Zm13.74-1.26a8,8,0,0,0-15.54,0,12,12,0,1,1,15.54,0ZM16,8a5,5,0,1,0,5,5A5,5,0,0,0,16,8Zm0,8a3,3,0,1,1,3-3A3,3,0,0,1,16,16Z"></path>
-              </svg>
-            Minha conta
-        </div>
-        <div class="itemLateral">
-            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 101 101" id="add">
-                <path d="M50.5 16.4c-18.8 0-34.1 15.3-34.1 34.1s15.3 34.1 34.1 34.1 34.1-15.3 34.1-34.1-15.3-34.1-34.1-34.1zm0 63.4c-16.1 0-29.3-13.1-29.3-29.3s13.1-29.3 29.3-29.3c16.1 0 29.3 13.1 29.3 29.3S66.6 79.8 50.5 79.8z"></path>
-                <path d="M66.2 47.8H52.9V34.5c0-1.3-1.1-2.4-2.4-2.4-1.3 0-2.4 1.1-2.4 2.4v13.3H34.8c-1.3 0-2.4 1.1-2.4 2.4s1.1 2.4 2.4 2.4h13.3v13.3c0 1.3 1.1 2.4 2.4 2.4 1.3 0 2.4-1.1 2.4-2.4V52.6h13.3c1.3 0 2.4-1.1 2.4-2.4s-1.1-2.4-2.4-2.4z"></path>
-              </svg>
-            Cadastro
-        </div>
-        <div id="logout"></div>
-    </nav>
-    <section class="mainSection">
+    <div th:replace="~{menuLateral :: menuLateralFragment}"></div>
+    <section class="mainSection item-80">
         <div class="main">
             <h1>Cadastro</h1>
             <form action="/Cadastro/Cadastrado" method="post" enctype="multipart/form-data">
@@ -54,26 +33,4 @@
 
     </section>
 </body>
-<style>
-    .menuLateral {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 70px;
-    width: 10%;
-}
-.itemLateral {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    align-self: center;
-}
-button {
-    padding: 10px 40px;
-}
-svg {
-    height: 50px;
-    width: 50px;
-}
-</style>
 </html>

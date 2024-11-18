@@ -17,10 +17,10 @@ import com.example.ControleFarmacia.Models.Produto;
 import com.example.ControleFarmacia.Services.ProdutoService;
 
 @RestController
-@RequestMapping("/Cadastro")
+@RequestMapping("/cadastro")
 public class CadastroItensController {
 
-    private static final String imagemCaminho = "src/main/resources/templates/imagens/";
+    private static final String imagemCaminho = "C:/SistemaFarmaciaImagens";
 
     @Autowired
     ProdutoService service;
@@ -41,6 +41,9 @@ public class CadastroItensController {
 
 
         File imagemDir = new File(imagemCaminho);
+        if (!imagemDir.exists()) {
+            imagemDir.mkdirs(); // Cria o diretório se ele não existir
+        }
         Path caminhoArquivo = Paths.get(imagemCaminho + (nome) + ".jpg");
         try {
             img.transferTo(caminhoArquivo);

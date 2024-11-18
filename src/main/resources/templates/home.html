@@ -1,74 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Pixelify+Sans:wght@400..700&display=swap"
+        rel="stylesheet">
     <title>Home</title>
 </head>
+
 <body>
-    <section class="section-products">
-        <div th:each="produto : ${produtos}">
-            <div class="product-card">
-                <div class="img">
-                    <img th:src="@{'/templates/imagens' + ${produto.nome}.toLowerCase() + '.jpg'}" alt="Sem Imagem">
-                </div>
-                <div class="name">
-                    <p th:text="${produto.nome}"></p>
-                </div>
-                <div class="price">
-                    <b><p th:text="'R$ ' + ${produto.preco}"></p></b>
-                </div>
-                <div class="actions">
-                    <div class="add">
-                        <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                          </svg>   </a>                       
-                    </div>
-                    <div class="remove">
-                        <a href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                          </svg>   </a>                       
-                    </div>
-                </div>
+    <div th:replace="~{menuLateral :: menuLateralFragment}"></div>
+    <section class="main item-70">
+        <div class="header">
+            <h1>Categorias</h1>
+            <div class="search">
+                <input type="search">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path
+                            d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </g>
+                </svg>
             </div>
         </div>
+        <section class="categories">
+            <div class="itemCategory">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75 12 3m0 0 3.75 3.75M12 3v18" />
+                </svg>
+                Top vendas
+            </div>
+            <div class="itemCategory">
+                <svg fill="#000000" height="200px" width="200px" version="1.1" id="Layer_1"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"
+                    xml:space="preserve">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <g>
+                            <g>
+                                <g>
+                                    <path
+                                        d="M66.927,341.862c-4.429-1.587-9.318,0.759-10.88,5.205c-3.217,9.114-4.847,18.662-4.847,28.399 c0,10.078,1.741,19.951,5.188,29.346c1.263,3.465,4.531,5.606,8.013,5.606c0.973,0,1.963-0.171,2.927-0.521 c4.429-1.621,6.707-6.528,5.086-10.948c-2.756-7.509-4.147-15.411-4.147-23.484c0-7.791,1.306-15.437,3.866-22.724 C73.702,348.305,71.373,343.433,66.927,341.862z">
+                                    </path>
+                                    <path
+                                        d="M375.467,0c-36.386,0-70.699,14.165-96.64,39.902l-95.898,95.966c-3.328,3.328-3.328,8.738,0,12.066 c3.337,3.328,8.738,3.336,12.075,0l95.872-95.94c22.699-22.519,52.736-34.927,84.591-34.927 c65.869,0,119.467,53.589,119.467,119.467c0,31.915-12.424,61.909-34.995,84.471c-0.026,0.026-0.051,0.06-0.085,0.085 c-2.21,2.236-89.387,89.37-113.357,113.331L171.537,159.334c-1.604-1.604-3.78-2.5-6.042-2.5c-2.261,0-4.429,0.896-6.033,2.5 L45.107,273.784c-1.852,1.86-3.593,3.601-4.966,5.299l-0.154-0.154C14.199,304.708,0,338.995,0,375.467 C0,450.748,61.244,512,136.533,512c36.924,0,71.535-14.558,97.391-40.917l95.138-95.087c3.328-3.328,3.328-8.73,0-12.066 c-3.328-3.337-8.738-3.328-12.066-0.009l-95.198,95.147c-22.682,23.125-52.966,35.866-85.265,35.866 c-65.877,0-119.467-53.589-119.467-119.467c0-31.915,12.425-61.909,34.987-84.471l0.128-0.137 c2.304-2.33,71.834-71.919,113.314-113.425L340.625,352.7h0.009c3.328,3.336,8.73,3.336,12.066,0 c0.495-0.495,0.922-1.041,1.271-1.621l112.905-112.862c1.86-1.869,3.601-3.61,4.975-5.299l0.154,0.154 C497.792,207.292,512,173.005,512,136.533C512,61.252,450.748,0,375.467,0z">
+                                    </path>
+                                    <path
+                                        d="M443.733,136.533c0,4.71,3.814,8.533,8.533,8.533c4.71,0,8.533-3.823,8.533-8.533c0-28.109-13.85-54.417-37.035-70.357 c-3.866-2.654-9.19-1.681-11.87,2.202c-2.662,3.883-1.681,9.19,2.202,11.861C432.649,92.996,443.733,114.039,443.733,136.533z">
+                                    </path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                Medicamentos
+            </div>
+            <div class="itemCategory">
+                <svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve" fill="#000000">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <style type="text/css">
+                            .st0 {
+                                fill: none;
+                                stroke: #000000;
+                                stroke-width: 2;
+                                stroke-linecap: round;
+                                stroke-linejoin: round;
+                                stroke-miterlimit: 10;
+                            }
+                        </style>
+                        <path class="st0"
+                            d="M20.7,12h-9.5c-0.5,0-0.8,0.3-1,0.7L7.2,24.2C6.3,27.6,8.8,31,12.3,31h7.3c3.5,0,6.1-3.3,5.2-6.7l-3.1-11.5 C21.6,12.3,21.2,12,20.7,12z">
+                        </path>
+                        <path class="st0"
+                            d="M19,22.1c0,1.6-1.3,2.9-3,2.9s-3-1.3-3-2.9c0-2.2,3-5.1,3-5.1S19,19.9,19,22.1z"></path>
+                        <rect x="13" y="8" class="st0" width="6" height="4"></rect>
+                        <line class="st0" x1="16" y1="8" x2="16" y2="4"></line>
+                        <path class="st0"
+                            d="M18,1h-4.5C12.7,1,12,1.7,12,2.5v0C12,3.3,12.7,4,13.5,4h4.1c1.6,0,3.1,0.5,4.5,1.4L23,6l2-1l-0.6-0.8 C22.9,2.2,20.5,1,18,1z">
+                        </path>
+                    </g>
+                </svg>
+                Higiene
+            </div>
+            <div class="itemCategory">
+                <svg fill="#000000" viewBox="0 0 24 24" id="Layer_1" data-name="Layer 1"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path
+                            d="M22.942,6.837,20.76,4.654l.947-.947a1,1,0,1,0-1.414-1.414l-.947.947L17.163,1.058a3.7,3.7,0,0,0-5.105,0,3.609,3.609,0,0,0,0,5.106L14.24,8.346,8.346,14.24,6.163,12.058a3.7,3.7,0,0,0-5.105,0,3.609,3.609,0,0,0,0,5.106L3.24,19.346l-.947.947a1,1,0,1,0,1.414,1.414l.947-.947,2.183,2.182a3.609,3.609,0,0,0,5.105,0h0a3.608,3.608,0,0,0,0-5.105L9.76,15.655l5.9-5.895,2.182,2.182a3.609,3.609,0,0,0,5.105,0h0a3.608,3.608,0,0,0,0-5.105ZM11,20.39a1.6,1.6,0,0,1-.472,1.138,1.647,1.647,0,0,1-2.277,0L2.472,15.749a1.61,1.61,0,1,1,2.277-2.277l5.779,5.779A1.6,1.6,0,0,1,11,20.39Zm10.528-9.862a1.647,1.647,0,0,1-2.277,0L13.472,4.749a1.61,1.61,0,1,1,2.277-2.277l5.779,5.779a1.609,1.609,0,0,1,0,2.277Z">
+                        </path>
+                    </g>
+                </svg>
+                Suplementos
+            </div>
+            <div class="itemCategory">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M18.4832 15.0004C19.4722 13.5203 20 11.7803 20 10.0002V8.23631C20 7.85754 20.214 7.51128 20.5528 7.34189L21.4472 6.89467C21.9412 6.64768 22.1414 6.04701 21.8944 5.55303C21.6474 5.05905 21.0468 4.85883 20.5528 5.10582L19.6584 5.55303C18.642 6.06121 18 7.1 18 8.23631V9.00024L12 9.00024V2.00024C12 1.44796 11.5523 1.00024 11 1.00024C9.21996 1.00024 7.47991 1.52808 5.99986 2.51702C4.51982 3.50595 3.36627 4.91156 2.68508 6.55609C2.00389 8.20063 1.82566 10.0102 2.17293 11.7561C2.5202 13.5019 3.37736 15.1055 4.63604 16.3642C4.88278 16.611 5.14279 16.8423 5.41453 17.0573C4.03795 17.3297 3 18.5437 3 20.0002C3 21.6571 4.34314 23.0002 6 23.0002C7.65685 23.0002 9 21.6571 9 20.0002C9 19.5356 8.89434 19.0955 8.70575 18.7029C8.88354 18.7498 9.0631 18.7913 9.24418 18.8273C10.5913 19.0953 11.9763 19.0504 13.2942 18.7029C13.1057 19.0955 13 19.5356 13 20.0002C13 21.6571 14.3431 23.0002 16 23.0002C17.6569 23.0002 19 21.6571 19 20.0002C19 18.5437 17.962 17.3297 16.5855 17.0573C17.3175 16.4779 17.9589 15.785 18.4832 15.0004ZM16.7834 13.8646C17.3611 13.0001 17.7352 12.0209 17.8834 11.0002L4.11656 11.0002C4.13389 11.1195 4.15435 11.2386 4.17795 11.3572C4.44634 12.7065 5.10881 13.9459 6.08158 14.9187C7.05435 15.8914 8.29374 16.5539 9.64301 16.8223C10.9923 17.0907 12.3908 16.9529 13.6618 16.4265C14.9328 15.9 16.0191 15.0085 16.7834 13.8646ZM10 3.1168V9.00024L4.11656 9.00024C4.19904 8.43247 4.35188 7.87411 4.57377 7.33842C5.10023 6.06743 5.99176 4.9811 7.13562 4.2168C8.0001 3.63917 8.97936 3.26508 10 3.1168ZM6 21.0079C5.44349 21.0079 4.99235 20.5568 4.99235 20.0002C4.99235 19.4437 5.44349 18.9926 6 18.9926C6.5565 18.9926 7.00764 19.4437 7.00764 20.0002C7.00764 20.5568 6.5565 21.0079 6 21.0079ZM14.9924 20.0002C14.9924 20.5568 15.4435 21.0079 16 21.0079C16.5565 21.0079 17.0076 20.5568 17.0076 20.0002C17.0076 19.4437 16.5565 18.9926 16 18.9926C15.4435 18.9926 14.9924 19.4437 14.9924 20.0002Z"
+                            fill="#0F0F0F"></path>
+                    </g>
+                </svg>
+                Mamãe e bebê
+            </div>
+        </section>
+        <h1>Produtos</h1>
+        <section class="section-products">
+            <div th:each="produto : ${produtos}">
+                <form action="">
+                    <div class="product-card">
+                        <div class="img">
+                            <img th:src="@{'/images/' + ${produto.nome} + '.jpg'}" alt="Sem Imagem" />
+                        </div>
+                        <div class="name">
+                            <p th:text="${produto.nome}"></p>
+                        </div>
+                        <div class="price">
+                            <b>
+                                <p th:text="'R$ ' + ${#numbers.formatDecimal(produto.preco, 0, 2)}"></p>
+                            </b>
+                        </div>
+                        <div class="actions">
+                            <div class="add">
+                                <button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                    </svg> </button>
+                            </div>
+                            <!-- <div class="remove">
+                                <button>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                    </svg> </button>
+                            </div> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
     </section>
-     
+    <section class="cart" style="flex: 0 0 15%;">
+        <div class="header">
+            <h1>Meu carrinho</h1>
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path
+                        d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
+                        stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </g>
+            </svg>
+        </div>
+        <div class="itemsCart">
+
+        </div>
+        <div class="infos">
+            <div class="subtotal">
+                <h4>Subtotal</h4>
+                <b>R$ PREÇO</b>
+            </div>
+            <a type="button" class="aButton">Finalizar</a>
+        </div>
+    </section>
 </body>
-<style>
-    svg {
-        height: 30px;
-        width: 30px;
-    }
-    img {
-        margin: 10px;
-        border: 1px solid black;
-        border-radius: 5%;
-        max-width: 150px;
-        max-height: 50px;
-    }
-    .section-products {
-        display: flex;
-        gap: 20px;
-    }
-    .product-card {
-        display: flex;
-        flex-direction: column;
-        border: 0.3px solid black;
-        border-radius: 5%;
-    }
-    .product-card div {
-        align-self: center;
-    }
-    .product-card div p {
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-    .actions {
-        display: flex;
-        gap: 20px;
-    }
-</style>
+
 </html>
