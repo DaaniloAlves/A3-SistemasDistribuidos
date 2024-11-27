@@ -1,4 +1,4 @@
-package com.example.ControleFarmacia.services;
+package com.example.ControleFarmacia.Services;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,13 +6,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.ControleFarmacia.models.Carrinho;
-import com.example.ControleFarmacia.models.CarrinhoItem;
-import com.example.ControleFarmacia.models.Produto;
-import com.example.ControleFarmacia.models.Usuario;
-import com.example.ControleFarmacia.repositories.CarrinhoItemRepo;
-import com.example.ControleFarmacia.repositories.CarrinhoRepo;
-import com.example.ControleFarmacia.repositories.UsuarioRepo;
+import com.example.ControleFarmacia.Models.Carrinho;
+import com.example.ControleFarmacia.Models.CarrinhoItem;
+import com.example.ControleFarmacia.Models.Produto;
+import com.example.ControleFarmacia.Models.Usuario;
+import com.example.ControleFarmacia.Repositories.CarrinhoItemRepo;
+import com.example.ControleFarmacia.Repositories.CarrinhoRepo;
+import com.example.ControleFarmacia.Repositories.UsuarioRepo;
 
 @Service
 public class CarrinhoService {
@@ -28,21 +28,6 @@ public class CarrinhoService {
 
     @Autowired
     private UsuarioRepo usuarioRepo;
-
-    // Criar um carrinho para um usuário
-    public Carrinho criarCarrinho(int usuarioId) {
-        Optional<Usuario> optionalUsuario = usuarioRepo.findById(usuarioId);
-        if (optionalUsuario.isEmpty()) {
-            throw new RuntimeException("Usuário não encontrado");
-        }
-
-        Usuario usuario = optionalUsuario.get();
-
-        Carrinho carrinho = new Carrinho();
-        carrinho.setUsuario(usuario); // Relacionando o carrinho com o usuário
-
-        return carrinhoRepo.save(carrinho);
-    }
 
     // Adicionar produto ao carrinho do usuário
     public CarrinhoItem adicionarProduto(int usuarioId, int produtoId, int quantidade) {
@@ -61,7 +46,7 @@ public class CarrinhoService {
         }
 
         // Criar ou obter o carrinho do usuário
-        Carrinho carrinho = usuario.getCarrinhos().isEmpty() ? criarCarrinho(usuarioId) : usuario.getCarrinhos().get(0); // Aqui assume-se que o usuário tem apenas um carrinho ativo, mas isso pode ser ajustado
+        Carrinho carrinho = usuario.getCarrinhos(); 
         // Cria o item do carrinho
         CarrinhoItem carrinhoItem = new CarrinhoItem();
         carrinhoItem.setProduto(produto.get());
@@ -80,7 +65,7 @@ public class CarrinhoService {
         }
 
         Usuario usuario = optionalUsuario.get();
-        Carrinho carrinho = usuario.getCarrinhos().isEmpty() ? null : usuario.getCarrinhos().get(0); // Aqui também considera-se o carrinho ativo
+        Carrinho carrinho = usuario.getCarrinhos() == null ? null : usuario.getCarrinhos(); // Aqui também considera-se o carrinho ativo
 
         if (carrinho == null) {
             throw new RuntimeException("Carrinho não encontrado para o usuário");
@@ -103,7 +88,7 @@ public class CarrinhoService {
         }
 
         Usuario usuario = optionalUsuario.get();
-        Carrinho carrinho = usuario.getCarrinhos().isEmpty() ? null : usuario.getCarrinhos().get(0); // Aqui também considera-se o carrinho ativo
+        Carrinho carrinho = usuario.getCarrinhos() == null ? null : usuario.getCarrinhos(); // Aqui também considera-se o carrinho ativo
 
         if (carrinho == null) {
             throw new RuntimeException("Carrinho não encontrado para o usuário");

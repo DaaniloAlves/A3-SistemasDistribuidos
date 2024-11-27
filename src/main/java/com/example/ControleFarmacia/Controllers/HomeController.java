@@ -1,4 +1,4 @@
-package com.example.ControleFarmacia.controllers;
+package com.example.ControleFarmacia.Controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.ControleFarmacia.models.Produto;
-import com.example.ControleFarmacia.services.ProdutoService;
+import com.example.ControleFarmacia.Models.Produto;
+import com.example.ControleFarmacia.Services.ProdutoService;
 
 @RestController
 @RequestMapping()

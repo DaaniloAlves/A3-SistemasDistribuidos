@@ -124,7 +124,7 @@
         <h1>Produtos</h1>
         <section class="section-products">
             <div th:each="produto : ${produtos}">
-                <form action="">
+                <form action="/Carrinho/Adicionar" method="post">
                     <div class="product-card">
                         <div class="img">
                             <img th:src="@{'/images/' + ${produto.nome} + '.jpg'}" alt="Sem Imagem" />
@@ -137,6 +137,7 @@
                                 <p th:text="'R$ ' + ${#numbers.formatDecimal(produto.preco, 0, 2)}"></p>
                             </b>
                         </div>
+                        <input type="hidden" name="id" th:value="${produto.id}" />
                         <div class="actions">
                             <div class="add">
                                 <button>

@@ -1,4 +1,4 @@
-package com.example.ControleFarmacia.controllers;
+package com.example.ControleFarmacia.Controllers;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.ControleFarmacia.models.Produto;
-import com.example.ControleFarmacia.services.ProdutoService;
+import com.example.ControleFarmacia.Models.Produto;
+import com.example.ControleFarmacia.Services.ProdutoService;
 
 @RestController
 @RequestMapping("/Cadastro")

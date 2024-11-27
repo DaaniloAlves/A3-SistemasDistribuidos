@@ -1,14 +1,17 @@
-package com.example.ControleFarmacia.controllers;
+package com.example.ControleFarmacia.Controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ControleFarmacia.Services.ProdutoService;
+
 @RestController
-@RequestMapping("/produto")
+@RequestMapping()
 public class ProdutoController {
     
-    // @Autowired
-    // private ProdutoService service;
+    @Autowired
+    private ProdutoService service;
 
     
 
