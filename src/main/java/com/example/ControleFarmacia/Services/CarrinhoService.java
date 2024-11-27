@@ -11,14 +11,10 @@ import com.example.ControleFarmacia.Models.CarrinhoItem;
 import com.example.ControleFarmacia.Models.Produto;
 import com.example.ControleFarmacia.Models.Usuario;
 import com.example.ControleFarmacia.Repositories.CarrinhoItemRepo;
-import com.example.ControleFarmacia.Repositories.CarrinhoRepo;
 import com.example.ControleFarmacia.Repositories.UsuarioRepo;
 
 @Service
 public class CarrinhoService {
-
-    @Autowired
-    private CarrinhoRepo carrinhoRepo;
 
     @Autowired
     private CarrinhoItemRepo carrinhoItemRepo;
@@ -36,25 +32,40 @@ public class CarrinhoService {
         if (optionalUsuario.isEmpty()) {
             throw new RuntimeException("Usuário não encontrado");
         }
-
+    
         Usuario usuario = optionalUsuario.get();
-
+    
         // Verifica se o produto existe
-        Optional<Produto> produto = produtoService.findById(produtoId);
-        if (produto == null) {
+        Optional<Produto> optionalProduto = produtoService.findById(produtoId);
+        if (optionalProduto.isEmpty()) {
             throw new RuntimeException("Produto não encontrado");
         }
-
+    
+        Produto produto = optionalProduto.get();
+    
         // Criar ou obter o carrinho do usuário
-        Carrinho carrinho = usuario.getCarrinhos(); 
-        // Cria o item do carrinho
-        CarrinhoItem carrinhoItem = new CarrinhoItem();
-        carrinhoItem.setProduto(produto.get());
-        carrinhoItem.setQuantidade(quantidade);
-        carrinhoItem.setCarrinho(carrinho);
-
-        // Salva o item no carrinho
-        return carrinhoItemRepo.save(carrinhoItem);
+        Carrinho carrinho = usuario.getCarrinhos();
+    
+        // Verifica se o produto já está no carrinho
+        Optional<CarrinhoItem> optionalCarrinhoItem = carrinho.getItens()
+            .stream()
+            .filter(item -> item.getProduto().getId() == produtoId)
+            .findFirst();
+    
+        if (optionalCarrinhoItem.isPresent()) {
+            // Incrementa a quantidade se o item já existir
+            CarrinhoItem carrinhoItemExistente = optionalCarrinhoItem.get();
+            carrinhoItemExistente.setQuantidade(carrinhoItemExistente.getQuantidade() + quantidade);
+            return carrinhoItemRepo.save(carrinhoItemExistente);
+        } else {
+            // Cria um novo item se o produto não estiver no carrinho
+            CarrinhoItem novoCarrinhoItem = new CarrinhoItem();
+            novoCarrinhoItem.setProduto(produto);
+            novoCarrinhoItem.setQuantidade(quantidade);
+            novoCarrinhoItem.setCarrinho(carrinho);
+    
+            return carrinhoItemRepo.save(novoCarrinhoItem);
+        }
     }
 
     // Listar itens do carrinho de um usuário

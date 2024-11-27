@@ -14,7 +14,7 @@ import com.example.ControleFarmacia.Models.Usuario;
 import com.example.ControleFarmacia.Services.UsuarioService;
 
 @RestController
-@RequestMapping("/Login")
+@RequestMapping("/Logar")
 public class UsuarioController {
     
     @Autowired
