@@ -11,6 +11,7 @@ import com.example.ControleFarmacia.Models.CarrinhoItem;
 import com.example.ControleFarmacia.Models.Produto;
 import com.example.ControleFarmacia.Models.Usuario;
 import com.example.ControleFarmacia.Repositories.CarrinhoItemRepo;
+import com.example.ControleFarmacia.Repositories.CarrinhoRepo;
 import com.example.ControleFarmacia.Repositories.UsuarioRepo;
 
 @Service
@@ -24,6 +25,11 @@ public class CarrinhoService {
 
     @Autowired
     private UsuarioRepo usuarioRepo;
+
+    @Autowired
+    private CarrinhoRepo carrinhoRepo;
+
+  
 
     // Adicionar produto ao carrinho do usuário
     public CarrinhoItem adicionarProduto(int usuarioId, int produtoId, int quantidade) {
@@ -44,7 +50,7 @@ public class CarrinhoService {
         Produto produto = optionalProduto.get();
     
         // Criar ou obter o carrinho do usuário
-        Carrinho carrinho = usuario.getCarrinhos();
+        Carrinho carrinho = usuario.getCarrinho();
     
         // Verifica se o produto já está no carrinho
         Optional<CarrinhoItem> optionalCarrinhoItem = carrinho.getItens()
@@ -76,7 +82,7 @@ public class CarrinhoService {
         }
 
         Usuario usuario = optionalUsuario.get();
-        Carrinho carrinho = usuario.getCarrinhos() == null ? null : usuario.getCarrinhos(); // Aqui também considera-se o carrinho ativo
+        Carrinho carrinho = usuario.getCarrinho() == null ? null : usuario.getCarrinho(); // Aqui também considera-se o carrinho ativo
 
         if (carrinho == null) {
             throw new RuntimeException("Carrinho não encontrado para o usuário");
@@ -99,7 +105,7 @@ public class CarrinhoService {
         }
 
         Usuario usuario = optionalUsuario.get();
-        Carrinho carrinho = usuario.getCarrinhos() == null ? null : usuario.getCarrinhos(); // Aqui também considera-se o carrinho ativo
+        Carrinho carrinho = usuario.getCarrinho() == null ? null : usuario.getCarrinho(); // Aqui também considera-se o carrinho ativo
 
         if (carrinho == null) {
             throw new RuntimeException("Carrinho não encontrado para o usuário");

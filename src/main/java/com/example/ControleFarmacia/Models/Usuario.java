@@ -1,32 +1,31 @@
 package com.example.ControleFarmacia.Models;
 
-import java.util.Collection;
-import java.util.List;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
-public class Usuario implements UserDetails {
+public class Usuario {
 
-    public Usuario(String login, String senha) {
-        this.username = login;
-        this.password = senha;
+    public Usuario() {
+
+    }
+
+    public Usuario(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
     }
 
     @Id
@@ -36,29 +35,24 @@ public class Usuario implements UserDetails {
     @NotNull(message = "O login não pode estar vazio.")
     @Size(min = 4, max = 20, message = "O login deve ter entre 4 e 20 caracteres.")
     private String username;
+
     @NotNull(message = "A senha não pode estar vazia.")
-    @Size(min = 40, max = 100, message = "A senha deve ter entre 40 e 100 caracteres.")
+    @Size(min = 4, max = 30, message = "A senha deve ter entre 4 e 30 caracteres.")
     private String password;
+
     @NotNull(message = "A permissão não pode estar vazio.")
-    @Size(min = 9, max = 10, message = "A permissão deve ser 'role_admin' ou 'role_user'.")
+    @Size(min = 4, max = 5, message = "A permissão deve ser 'admin' ou 'user'")
     private String role;
 
-    @NotNull
+    @JsonIgnoreProperties("usuario") // Ignora o carrinho para evitar referência circular
     @OneToOne
-    private Carrinho carrinhos; 
+    @JoinColumn(name = "carrinho_id", nullable = true)
+    private Carrinho carrinho;
 
-    @Override
-    public String getUsername() {
-        return this.username;
+    public void setCarrinho(Carrinho carrinho) {
+        this.carrinho = carrinho;
     }
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role));
+    public Carrinho getCarrinho() {
+        return this.carrinho;
     }
 }

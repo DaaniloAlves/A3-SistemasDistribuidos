@@ -47,9 +47,9 @@ public class CadastroItensController {
         Path caminhoArquivo = Paths.get(imagemCaminho + (nome) + ".jpg");
         try {
             img.transferTo(caminhoArquivo);
-            System.out.println("certo");
+            System.out.println("Salvamento da imagem deu certo");
         } catch (Exception e) {
-            System.out.println("errado");
+            System.out.println("Salvamento da imagem deu errado");
         }
         service.add(produto);
         return "produto cadastrado com sucesso";

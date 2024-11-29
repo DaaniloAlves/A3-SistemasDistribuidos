@@ -27,5 +27,9 @@ public class Produto {
     private String descricao;
     @NotNull(message = "O preço não pode esstar vazio.")
     private float preco;
+
+    public float getPreco() {
+        return this.preco;
+    }
 }
     

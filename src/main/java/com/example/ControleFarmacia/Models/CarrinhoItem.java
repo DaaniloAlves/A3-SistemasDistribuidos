@@ -7,15 +7,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 public class CarrinhoItem {
 
     @Id
@@ -39,5 +36,8 @@ public class CarrinhoItem {
         this.produto = produto;
         this.quantidade = quantidade;
         this.precoUnitario = produto.getPreco();
+    }
+    public CarrinhoItem() {
+
     }
 }
