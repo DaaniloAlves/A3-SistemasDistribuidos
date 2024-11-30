@@ -14,7 +14,7 @@ public class FilterConfig {
         registrationBean.setFilter(new LoginFilter());
     
         // Define as URLs protegidas pelo filtro
-        registrationBean.addUrlPatterns("/Home/*", "/Cadastro/*", "/Carrinho/*", "/Usuario/*");
+        registrationBean.addUrlPatterns("/Home/*", "/Cadastro/*", "/Carrinho/*");
         
         return registrationBean;
     }

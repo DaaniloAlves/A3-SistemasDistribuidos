@@ -1,5 +1,7 @@
 package com.example.ControleFarmacia.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,6 +24,7 @@ public class CarrinhoItem {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "carrinho_id")
+    @JsonIgnoreProperties("itens")
     private Carrinho carrinho;
 
     @NotNull
@@ -39,5 +42,11 @@ public class CarrinhoItem {
     }
     public CarrinhoItem() {
 
+    }
+    public CarrinhoItem(int id, Carrinho carrinho, Produto produto, int quantidade) {
+        this.id = id;
+        this.carrinho = carrinho;
+        this.produto = produto;
+        this.quantidade = quantidade;
     }
 }

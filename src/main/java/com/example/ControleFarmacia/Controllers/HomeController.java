@@ -14,7 +14,7 @@ import com.example.ControleFarmacia.Services.CarrinhoService;
 import com.example.ControleFarmacia.Services.ProdutoService;
 
 @RestController
-@RequestMapping()
+@RequestMapping("/Home")
 public class HomeController {
     
     @Autowired
@@ -23,20 +23,15 @@ public class HomeController {
     @Autowired
     CarrinhoService carrinhoService;
 
-    @GetMapping("/Home")
-    private ModelAndView home() {
-
-       
-
+    @GetMapping()
+    private ModelAndView index() {
         ModelAndView mv = new ModelAndView("home");
         Iterable<Produto> produtosIterable = produtoService.findAll();
         List<Produto> produtos = new ArrayList<>();
         // List<CarrinhoItem> produtosCarrinho = carrinhoService.listarItensDoCarrinho(usuarioId);
         produtosIterable.forEach(produtos::add);
         mv.addObject("produtos", produtos);
-        return mv; 
-        
-        
+        return mv;   
     }
     
 

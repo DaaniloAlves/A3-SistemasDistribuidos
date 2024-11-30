@@ -1,24 +1,17 @@
 package com.example.ControleFarmacia.Controllers;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.ControleFarmacia.Models.Carrinho;
 import com.example.ControleFarmacia.Models.CarrinhoItem;
-import com.example.ControleFarmacia.Models.Produto;
+import com.example.ControleFarmacia.Models.Usuario;
 import com.example.ControleFarmacia.Services.CarrinhoService;
-import com.example.ControleFarmacia.Services.ProdutoService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/Carrinho")
@@ -27,13 +20,36 @@ public class CarrinhoController {
     @Autowired
     private CarrinhoService carrinhoService;
 
-    @Autowired
-    private ProdutoService produtoService;
-
     @PostMapping("/Adicionar")
-    public ResponseEntity<CarrinhoItem> adicionarAoCarrinho(@RequestParam int id) {
-        Optional<Produto> produto = produtoService.findById(id);
-        carrinhoService.adicionarProduto(1, id, 1);
-        return null;
+    public ResponseEntity<CarrinhoItem> adicionarAoCarrinho(@RequestParam int id, HttpServletRequest request) {
+        Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("user");
+        // Chama o service com o ID do usuário logado
+        CarrinhoItem itemAdicionado = carrinhoService.adicionarProduto(usuarioLogado.getId(), id, 1);
+
+        return ResponseEntity.ok(itemAdicionado);
+    }
+
+    // Remover uma unidade do produto no carrinho
+    @PostMapping("/RemoverUmaUnidade")
+    public ResponseEntity<Void> removerUmaUnidade(@RequestParam int itemId, HttpServletRequest request) {
+        Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("user");
+        carrinhoService.removerUmaUnidadeDoProduto(usuarioLogado.getId(), itemId);
+        return ResponseEntity.ok().build();
+    }
+
+    // Remover todas as unidades de um produto do carrinho
+    @PostMapping("/RemoverTodasUnidades")
+    public ResponseEntity<Void> removerTodasUnidades(@RequestParam int itemId, HttpServletRequest request) {
+        Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("user");
+        carrinhoService.removerProdutoDoCarrinho(usuarioLogado.getId(), itemId);  // Reaproveitar o método que já existe para remover completamente
+        return ResponseEntity.ok().build();
+    }
+
+    // Limpar o carrinho de um usuário
+    @PostMapping("/LimparCarrinho")
+    public ResponseEntity<Void> limparCarrinho(HttpServletRequest request) {
+        Usuario usuarioLogado = (Usuario) request.getSession().getAttribute("user");
+        carrinhoService.limparCarrinho(usuarioLogado.getId());
+        return ResponseEntity.ok().build();
     }
 }

@@ -5,11 +5,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.ControleFarmacia.DTOs.UsuarioDTO;
 import com.example.ControleFarmacia.Models.Carrinho;
 import com.example.ControleFarmacia.Models.Usuario;
 import com.example.ControleFarmacia.Repositories.CarrinhoRepo;
 import com.example.ControleFarmacia.Repositories.UsuarioRepo;
+import com.example.ControleFarmacia.Util.HashUtil;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class UsuarioService {
@@ -21,37 +23,29 @@ public class UsuarioService {
         this.usuarioRepo = usuarioRepo;
         this.carrinhoRepo = carrinhoRepo;
     }
-
-    public Usuario buscarUltimoUsuario() {
-        return usuarioRepo.findLastUser()
-                .orElseThrow(() -> new RuntimeException("Nenhum usuário encontrado"));
-    }
-
-    public boolean usuarioExiste(Optional<UsuarioDTO> usuario) {
-        Optional<Usuario> usuarioVerificado = usuarioRepo.findByUsername(usuario.get().getUsername());
-        if (usuarioVerificado.isEmpty()) {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean verificarLogin(Optional<UsuarioDTO> usuario) {
-            if (usuarioExiste(usuario) && usuario.get().getPassword().equals(usuarioRepo.findPasswordByUsername(usuario.get().getUsername()))) {
-                return true;
+        public Optional<Usuario> buscarPorLoginESenha(String login, String senha) {
+            String senhaHash = HashUtil.gerarHash(senha);
+            Optional<Usuario> usuarioOptional = usuarioRepo.findByUsernameAndPassword(login, senhaHash);
+            if (usuarioOptional.isPresent()) {
+                return usuarioOptional; // Retorna o usuário completo se encontrado
             }
-            return false;
+            return Optional.empty();
         }
-    
 
-public Usuario criarUsuario(Usuario usuario) {
-    // Cria o usuário
-    Usuario savedUsuario = usuarioRepo.save(usuario);
-    return new Usuario(savedUsuario.getUsername(), savedUsuario.getPassword(), savedUsuario.getRole());
-}
-
-public void salvarUsuarioComCarrinho(Usuario usuario, Carrinho carrinho) {
-    carrinhoRepo.save(carrinho); // Salva o carrinho primeiro
-    usuario.setCarrinho(carrinho); // Associa o carrinho ao usuário
-    usuarioRepo.save(usuario); // Salva o usuário novamente
-}
+        @Transactional
+        public void salvarUsuarioComCarrinho(Usuario usuario, Carrinho carrinho) {
+            // Encriptando a senha
+            Usuario usuarioComSenhaHash = usuario;
+            usuarioComSenhaHash.setPassword(HashUtil.gerarHash(usuario.getPassword()));
+            // Salva o usuário sem o carrinho ainda associado
+            Usuario usuarioSalvo = usuarioRepo.save(usuarioComSenhaHash);
+        
+            // Atualiza o carrinho com o usuário associado
+            carrinho.setUsuario(usuarioSalvo);
+            Carrinho carrinhoSalvo = carrinhoRepo.save(carrinho);
+        
+            // Atualiza o usuário com o carrinho salvo
+            usuarioSalvo.setCarrinho(carrinhoSalvo);
+            usuarioRepo.save(usuarioSalvo);
+        }
 }

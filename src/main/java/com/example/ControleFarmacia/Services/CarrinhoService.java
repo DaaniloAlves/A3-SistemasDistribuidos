@@ -82,7 +82,7 @@ public class CarrinhoService {
         }
 
         Usuario usuario = optionalUsuario.get();
-        Carrinho carrinho = usuario.getCarrinho() == null ? null : usuario.getCarrinho(); // Aqui também considera-se o carrinho ativo
+        Carrinho carrinho = usuario.getCarrinho() == null ? null : usuario.getCarrinho();
 
         if (carrinho == null) {
             throw new RuntimeException("Carrinho não encontrado para o usuário");
@@ -97,6 +97,36 @@ public class CarrinhoService {
         carrinhoItemRepo.delete(item);
     }
 
+    public void removerUmaUnidadeDoProduto(int usuarioId, int itemId) {
+        // Recupera o item do carrinho pelo ID
+        CarrinhoItem item = carrinhoItemRepo.findById(itemId)
+            .orElseThrow(() -> new RuntimeException("Item não encontrado"));
+    
+// Verifica se o item tem um carrinho associado
+if (item.getCarrinho() == null) {
+    throw new RuntimeException("O item não está associado a um carrinho");
+}
+
+// Verifica se o carrinho tem um usuário associado
+if (item.getCarrinho().getUsuario() == null) {
+    throw new RuntimeException("O carrinho não está associado a um usuário");
+}
+
+        // Verifica se o item pertence ao usuário
+        if (item.getCarrinho().getUsuario().getId() != usuarioId) {
+            throw new RuntimeException("O item não pertence ao carrinho deste usuário");
+        }
+    
+        // Reduz a quantidade em uma unidade
+        if (item.getQuantidade() > 1) {
+            item.setQuantidade(item.getQuantidade() - 1);
+            carrinhoItemRepo.save(item); // Atualiza o item no banco
+        } else {
+            // Se a quantidade for 1, remove o item completamente
+            carrinhoItemRepo.delete(item);
+        }
+    }
+
     // Limpar o carrinho de um usuário
     public void limparCarrinho(int usuarioId) {
         Optional<Usuario> optionalUsuario = usuarioRepo.findById(usuarioId);
@@ -105,7 +135,7 @@ public class CarrinhoService {
         }
 
         Usuario usuario = optionalUsuario.get();
-        Carrinho carrinho = usuario.getCarrinho() == null ? null : usuario.getCarrinho(); // Aqui também considera-se o carrinho ativo
+        Carrinho carrinho = usuario.getCarrinho() == null ? null : usuario.getCarrinho(); 
 
         if (carrinho == null) {
             throw new RuntimeException("Carrinho não encontrado para o usuário");

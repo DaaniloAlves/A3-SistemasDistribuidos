@@ -1,5 +1,6 @@
 package com.example.ControleFarmacia.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -10,12 +11,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
 public class Usuario {
 
     public Usuario() {
@@ -27,6 +24,10 @@ public class Usuario {
         this.password = password;
         this.role = role;
     }
+    public Usuario(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +38,8 @@ public class Usuario {
     private String username;
 
     @NotNull(message = "A senha não pode estar vazia.")
-    @Size(min = 4, max = 30, message = "A senha deve ter entre 4 e 30 caracteres.")
+    @Size(min = 5, max = 100, message = "A senha deve ter entre 5 e 100 caracteres.")
+    @JsonIgnore // Para não expor a senha no JSON
     private String password;
 
     @NotNull(message = "A permissão não pode estar vazio.")
@@ -49,10 +51,42 @@ public class Usuario {
     @JoinColumn(name = "carrinho_id", nullable = true)
     private Carrinho carrinho;
 
+    public Usuario(int id, String username, String password, String role) {
+        this.id = id;
+        this.password = password;
+        this.role = role;
+        this.username = username;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setCarrinho(Carrinho carrinho) {
         this.carrinho = carrinho;
     }
+    public void setPassword(String senha) {
+        this.password = senha;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public void setRole(String role) {
+        this.role = role;
+    }
     public Carrinho getCarrinho() {
         return this.carrinho;
+    }
+    public String getRole() {
+        return this.role;
+    }
+    public String getUsername() {
+        return this.username;
+    }
+    public String getPassword() {
+        return this.password;
+    }
+    public int getId() {
+        return this.id;
     }
 }

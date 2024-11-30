@@ -15,6 +15,15 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Produto {
+
+    public Produto(int id, String nome, String desc, int qtd, float preco) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = desc;
+        this.qtd = qtd;
+        this.preco = preco;
+    }
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
@@ -27,6 +36,10 @@ public class Produto {
     private String descricao;
     @NotNull(message = "O preço não pode esstar vazio.")
     private float preco;
+
+    public void setQuantidade(int qtd) {
+        this.qtd = qtd;
+    }
 
     public float getPreco() {
         return this.preco;
