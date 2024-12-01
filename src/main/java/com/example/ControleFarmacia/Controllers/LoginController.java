@@ -32,9 +32,11 @@ public class LoginController {
     public ModelAndView logar(@RequestParam String login, @RequestParam String senha, HttpServletRequest request) {
         Optional<Usuario> usuarioOptional = usuarioService.buscarPorLoginESenha(login, senha); 
     if (usuarioOptional.isPresent()) {
-        Usuario usuarioCompleto = usuarioOptional.get();
-        request.getSession().setAttribute("user", usuarioCompleto); // Salva o usuário completo na sessão
-        return new ModelAndView("redirect:/Home");
+        if (usuarioOptional.get().getAtivo() == true) {
+            Usuario usuarioCompleto = usuarioOptional.get();
+            request.getSession().setAttribute("user", usuarioCompleto); // Salva o usuário completo na sessão
+            return new ModelAndView("redirect:/Home");
+        }
     }
     return new ModelAndView("loginIndex"); // Volta para a tela de login em caso de falha
     }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Produtos</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <main class="tela_meio">
+        <div class="botao-home">
+            <a href="/Home" class="btn-home" style="margin-bottom: 100px;">Home</a>
+        </div>
+        <header class="barra_inicial">
+            <h1>Gerenciar Produtos</h1>
+            <div class="botao-cadastro">
+                <a href="/Cadastro/Produto" class="botao-link">Cadastrar Produto</a>
+            </div>
+        </header>
+
+        <!-- Tabela de Produtos -->
+        <section class="gerenciar-produtos">
+            <table class="tabela-produtos">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Imagem</th>
+                        <th>Preço</th>
+                        <th>Quantidade</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop para exibir os produtos dinamicamente -->
+                    <tr th:each="produto : ${produtos}">
+                        <td th:text="${produto.id}"></td>
+                        <td th:text="${produto.nome}"></td>
+                        <td>
+                            <img th:src="@{'/images/' + ${produto.nome} + '.jpg'}" alt="Sem Imagem" width="35"/>
+                        </td>
+                        <td th:text="'R$ ' + ${#numbers.formatDecimal(produto.preco, 0, 2)}"></td>
+                        <td th:text="${produto.qtd}"></td>
+                        <td>
+                            <a th:href="@{/Gerenciar/editar-produto/{id}(id=${produto.id})}">Editar</a>
+                            <a th:href="@{/Gerenciar/deletar-produto/{id}(id=${produto.id})}" 
+                               onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                        </td>
+                    </tr>
+                    <!-- Fim do loop -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+
+</html>

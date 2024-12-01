@@ -40,9 +40,15 @@ public class Produto {
     public void setQuantidade(int qtd) {
         this.qtd = qtd;
     }
+    public void setPreco(float preco) {
+        this.preco = preco;
+    }
 
     public float getPreco() {
         return this.preco;
+    }
+    public int getQuantidade() {
+        return this.qtd;
     }
 }
     

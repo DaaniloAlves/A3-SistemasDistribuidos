@@ -5,8 +5,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,17 +41,14 @@ public class CadastroController {
         if (!"ADMIN".equalsIgnoreCase(usuarioLogado.getRole())) {
         return new ModelAndView("erroPermissao");
     }
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("cadastroIndex");
-        return mv;
+    return new ModelAndView("cadastroProduto");
     }
     @PostMapping("/Produto")
-    public ResponseEntity<Produto> produtoCadastro(@RequestParam("name") String nome, @RequestParam("desc") String desc, @RequestParam("qtd") int qtd, @RequestParam("price") float preco, @RequestParam("img") MultipartFile img, HttpServletRequest request) {
+    public ModelAndView produtoCadastro(@RequestParam("name") String nome, @RequestParam("desc") String desc, @RequestParam("qtd") int qtd, @RequestParam("price") float preco, @RequestParam("img") MultipartFile img, HttpServletRequest request) {
         Usuario usuarioLogado = (Usuario)request.getSession().getAttribute("user");
         // Verifica se o usuário tem a role ADMIN
         if (!"ADMIN".equalsIgnoreCase(usuarioLogado.getRole())) {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN)  // Retorna status 403 Forbidden
-                             .body(null);
+        return new ModelAndView("erroPermissao");
     }
         Produto produto = new Produto();
         produto.setDescricao(desc);
@@ -74,8 +69,7 @@ public class CadastroController {
             System.out.println("Salvamento da imagem deu errado");
         }
         produtoService.add(produto);
-        return ResponseEntity.status(HttpStatus.CREATED)  // Retorna status 201 Created
-        .body(produto);
+        return new ModelAndView("redirect:/Gerenciar/Produtos");
     }
 
     @GetMapping("/Usuario")
@@ -89,20 +83,18 @@ public class CadastroController {
     }
 
     @PostMapping("/Usuario")
-    public ResponseEntity<Usuario> cadastrarUsuario(@RequestParam String username, @RequestParam String password, @RequestParam(defaultValue = "false") boolean admin, HttpServletRequest request) {
+    public ModelAndView cadastrarUsuario(@RequestParam String username, @RequestParam String password, @RequestParam String role, HttpServletRequest request) {
         Usuario usuarioLogado = (Usuario)request.getSession().getAttribute("user");
         // Verifica se o usuário tem a role ADMIN
         if (!"ADMIN".equalsIgnoreCase(usuarioLogado.getRole())) {
-        return new ResponseEntity<>(usuarioLogado, HttpStatus.FORBIDDEN);
+            return new ModelAndView("erroPermissao");
     }
-        // Define a role com base no checkbox
-        String role = admin ? "ADMIN" : "USER";
-        Usuario usuario = new Usuario(username, password, role);
+        Usuario usuario = new Usuario(username, password, role, true);
         // Cria e associa um carrinho ao usuário
         Carrinho carrinho = new Carrinho();
         carrinho.setUsuario(usuario);
         usuario.setCarrinho(carrinho);
         usuarioService.salvarUsuarioComCarrinho(usuario, carrinho);
-        return new ResponseEntity<>(usuario, HttpStatus.CREATED);
+        return new ModelAndView("redirect:/Gerenciar/Usuarios");
     }
 }

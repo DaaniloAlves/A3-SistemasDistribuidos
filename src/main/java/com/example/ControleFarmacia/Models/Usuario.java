@@ -18,7 +18,12 @@ public class Usuario {
     public Usuario() {
 
     }
-
+    public Usuario(String username, String password, String role, boolean ativo) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.ativo = ativo;
+    }
     public Usuario(String username, String password, String role) {
         this.username = username;
         this.password = password;
@@ -46,6 +51,9 @@ public class Usuario {
     @Size(min = 4, max = 5, message = "A permissão deve ser 'admin' ou 'user'")
     private String role;
 
+    @NotNull(message = "A permissão não pode estar vazio.")
+    private boolean ativo;
+
     @JsonIgnoreProperties("usuario") // Ignora o carrinho para evitar referência circular
     @OneToOne
     @JoinColumn(name = "carrinho_id", nullable = true)
@@ -57,9 +65,19 @@ public class Usuario {
         this.role = role;
         this.username = username;
     }
+    public Usuario(int id, String username, String password, String role, boolean ativo) {
+        this.id = id;
+        this.password = password;
+        this.role = role;
+        this.username = username;
+        this.ativo = ativo;
+    }
 
     public void setId(int id) {
         this.id = id;
+    }
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
     public void setCarrinho(Carrinho carrinho) {
@@ -88,5 +106,8 @@ public class Usuario {
     }
     public int getId() {
         return this.id;
+    }
+    public boolean getAtivo() {
+        return this.ativo;
     }
 }

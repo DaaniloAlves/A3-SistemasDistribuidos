@@ -23,6 +23,10 @@ public class UsuarioService {
         this.usuarioRepo = usuarioRepo;
         this.carrinhoRepo = carrinhoRepo;
     }
+
+    public Iterable<Usuario> findAll() {
+        return usuarioRepo.findAll();
+    }
         public Optional<Usuario> buscarPorLoginESenha(String login, String senha) {
             String senhaHash = HashUtil.gerarHash(senha);
             Optional<Usuario> usuarioOptional = usuarioRepo.findByUsernameAndPassword(login, senhaHash);

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuário</title>
+    <link rel="stylesheet" href="/css/editar.css">
+</head>
+
+<body>
+    <main class="tela_meio">
+        <div class="botao-home">
+            <a href="/Home" class="btn-home" style="margin-bottom: 100px;">Home</a>
+        </div>
+        <header class="barra_inicial">
+            <h1>Editar Usuário</h1>
+        </header>
+
+        <!-- Formulário de Edição de Usuário -->
+        <section class="formulario-cadastro">
+             <form action="/Gerenciar/editar-usuario" method="post" class="form-cadastro">
+                <input type="hidden" name="id" th:value="${usuario.id}" /> <!-- ID do Usuário -->
+
+                <div class="form-group">
+                    <label for="login">Login</label>
+                    <input type="text" id="login" name="username" th:value="${usuario.username}" placeholder="Digite o login do usuário" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="password" placeholder="Digite a nova senha" />
+                </div>
+
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select id="role" name="role" required>
+                        <option value="USER" th:selected="${usuario.role == 'USER'}">Usuário</option>
+                        <option value="ADMIN" th:selected="${usuario.role == 'ADMIN'}">Administrador</option>
+                    </select>
+                </div> 
+                <div class="form-group">
+                    <label for="ativo">Ativo</label>
+                    <input type="checkbox" th:checked="${usuario.ativo}">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn-submit">Salvar Alterações</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+
+</html>

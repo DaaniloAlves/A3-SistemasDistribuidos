@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.tela_meio {
+    width: 100%;
+    max-width: 450px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.barra_inicial {
+    display: flex;
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    margin-bottom: 30px;
+}
+
+.barra_inicial h1 {
+    font-size: 28px;
+    color: #333;
+}
+
+.formulario-cadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-cadastro .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-cadastro label {
+    margin-top: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-cadastro input {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border 0.3s;
+}
+
+.form-cadastro input:focus {
+    border-color: #2ED2C5;
+    outline: none;
+}
+
+.form-cadastro button {
+    margin-top: 20px;
+    padding: 14px;
+    background-color: #2ED2C5;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-cadastro button:hover {
+    background-color: #27b4a8;
+}
+
+.form-cadastro input[type="checkbox"] {
+    margin-top: 10px;
+    margin-right: 10px;
+    width: auto;
+}
+
+.form-cadastro .admin-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.form-cadastro span {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Estilo para o botão Home */
+.botao-home {
+    margin-top: 20px; /* Espaço acima do botão */
+    display: flex;
+    justify-content: center; /* Alinha o botão no centro */
+}
+
+.btn-home {
+    padding: 10px 20px;
+    background-color: #2ED2C5;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-home:hover {
+    background-color: #27b4a8;
+    transform: scale(1.05);
+}
+
+.btn-home:active {
+    transform: scale(1);
+}

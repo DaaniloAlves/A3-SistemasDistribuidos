@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Produto</title>
+    <link rel="stylesheet" href="/css/editar.css">
+</head>
+
+<body>
+    <main class="tela_meio">
+        <div class="botao-home">
+            <a href="/Home" class="btn-home" style="margin-bottom: 100px;">Home</a>
+        </div>
+        <header class="barra_inicial">
+            <h1>Editar Produto</h1>
+        </header>
+
+        <!-- Formulário de Edição de Produto -->
+        <section class="formulario-cadastro">
+            <form action="/Gerenciar/editar-produto" method="post" enctype="multipart/form-data" class="form-cadastro">
+                <input type="hidden" name="id" th:value="${produto.id}" /> <!-- ID do Produto -->
+
+                <div class="form-group">
+                    <label for="nome">Nome do Produto</label>
+                    <input type="text" id="nome" name="nome" th:value="${produto.nome}" placeholder="Digite o nome do produto" required />
+                </div>
+                <div class="form-group">
+                    <label for="descricao">Descrição</label>
+                    <input type="text" id="descricao" name="descricao" th:value="${produto.descricao}" placeholder="Digite a descrição do produto" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="preco">Preço</label>
+                    <input type="number" id="preco" name="preco" th:value="${produto.preco}" step="0.01" placeholder="Digite o preço do produto" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="quantidade">Quantidade</label>
+                    <input type="number" id="quantidade" name="quantidade" th:value="${produto.qtd}" placeholder="Digite a quantidade em estoque" required />
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn-submit">Salvar Alterações</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+
+</html>

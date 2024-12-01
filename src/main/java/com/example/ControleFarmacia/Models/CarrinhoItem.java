@@ -40,6 +40,16 @@ public class CarrinhoItem {
         this.quantidade = quantidade;
         this.precoUnitario = produto.getPreco();
     }
+    public CarrinhoItem(int id, Produto produto, int quantidade) {
+        this.id = id;
+        this.produto = produto;
+        this.quantidade = quantidade;
+    }
+    public CarrinhoItem(Carrinho carrinho, Produto produto, int quantidade) {
+        this.carrinho = carrinho;
+        this.produto = produto;
+        this.quantidade = quantidade;
+    }
     public CarrinhoItem() {
 
     }

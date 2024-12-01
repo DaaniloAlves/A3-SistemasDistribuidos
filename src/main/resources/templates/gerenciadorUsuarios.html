@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Usuários</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <main class="tela_meio">
+        <div class="botao-home">
+            <a href="/Home" class="btn-home" style="margin-bottom: 100px;">Home</a>
+        </div>
+        <header class="barra_inicial">
+            <h1>Gerenciar Usuários</h1>
+            <div class="botao-cadastro">
+                <a href="/Cadastro/Usuario" class="botao-link">Cadastrar Novo Usuário</a>
+            </div>
+            <!-- Botão Home, agora fora da section -->
+            
+        </header>
+
+        <!-- Tabela de Usuários -->
+        <section class="gerenciar-usuarios">
+            <table class="tabela-usuarios">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Login</th>
+                        <th>Admin</th>
+                        <th>Ativo</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Exemplo de usuário, dados passados dinamicamente -->
+                    <tr th:each="usuario : ${usuarios}">
+                        <td th:text="${usuario.id}"></td>
+                        <td th:text="${usuario.username}"></td>
+                        <td th:text="${usuario.role}"></td>
+                        <td th:text="${usuario.ativo}"></td>
+                        <td>
+                            <!-- Link para editar -->
+                            <a th:href="@{/Gerenciar/editar-usuario/{id}(id=${usuario.id})}">Editar</a>
+                            
+                            <!-- Exibe 'Desativar' se o usuário estiver ativo -->
+                            <a th:href="@{/Gerenciar/desativar-usuario/{id}(id=${usuario.id})}"
+                               th:if="${usuario.ativo}" 
+                               onclick="return confirm('Tem certeza que deseja desativar?')">Desativar</a>
+                            
+                            <!-- Exibe 'Ativar' se o usuário estiver inativo -->
+                            <a th:href="@{/Gerenciar/ativar-usuario/{id}(id=${usuario.id})}"
+                               th:if="${!usuario.ativo}" 
+                               onclick="return confirm('Tem certeza que deseja ativar?')">Ativar</a>
+                        </td>
+                    </tr>
+                    <!-- Outros usuários -->
+                </tbody>
+            </table>
+        </section>
+        
+    </main>
+</body>
+
+</html>
